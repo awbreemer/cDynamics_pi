@@ -1,4 +1,5 @@
 from flask import Flask, render_template, request
+#from flask_sslify import SSLify
 
 small_adjust_val = .1
 large_adjust_val = .5
@@ -40,6 +41,8 @@ def test_3_args(a1, a2, a3 = 0):
         print(a3)   
 
 app = Flask(__name__)
+#sslify = SSLify(app)
+#sslify = SSLify(app, permanent=True, age=300, subdomains=True, port=8443)
 
 
 
