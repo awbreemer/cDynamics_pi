@@ -1,8 +1,10 @@
 from flask import Flask, render_template, request
+import serial
 #from flask_sslify import SSLify
 
 small_adjust_val = .1
 large_adjust_val = .5
+baud_rate = 9600
 
 def determine_input(cust, big_d, d, i, big_i):
     args = locals()
@@ -14,6 +16,11 @@ def output_val(inVal):
     F = open("RecordVals.txt", 'a')
     F.write("\n" + str(inVal))
     F.close()
+
+def to_arduino_serial(inString):
+    ser.write((inString + "\n").encode('ASCII'))
+    line = ser.readline().decode('ASCII').rstrip()
+    return line
 
 
 class process_vals:
@@ -48,6 +55,7 @@ app = Flask(__name__)
 
 @app.route('/', methods = ['GET', 'POST'])
 def provide_values():
+    outText = 0
     if request.method == 'POST':
         newVal = process_vals()
         newVal.input_request_val(request.form.get('user_val'))
@@ -57,9 +65,11 @@ def provide_values():
         newVal.input_request_but(request.form.get('increase'), small_adjust_val)
         newVal.input_request_but(request.form.get('big_increase'), large_adjust_val)
         output_val(newVal.return_turn_amt()) 
-    return render_template("form2.html")
+        outText = to_arduino_serial(str(newVal.return_turn_amt()))
+    return render_template("form2.html", returnText=outText)
 
 
 if __name__ == '__main__':
+    ser = serial.Serial('/dev/ttyUSB0', baud_rate, timeout=1)
     app.run(host="0.0.0.0", debug=True)
 
