@@ -6,5 +6,5 @@ if __name__ == '__main__':
 
     while True:
         if ser.in_waiting > 0:
-            line = ser.readline().decode('otf-8').rstrip()
+            line = ser.readline().decode('ascii').rstrip()
             print(line)
