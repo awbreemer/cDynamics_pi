@@ -58,7 +58,7 @@ app = Flask(__name__)
 
 @app.route('/', methods = ['GET', 'POST'])
 def provide_values():
-    outText = 0
+    outText = "-"
     if request.method == 'POST':
         newVal = process_vals()
         newVal.input_request_val(request.form.get('user_val'))
