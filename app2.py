@@ -1,5 +1,6 @@
 from flask import Flask, render_template, request
 import serial
+import time
 #from flask_sslify import SSLify
 
 small_adjust_val = .1
@@ -20,6 +21,8 @@ def output_val(inVal):
 def to_arduino_serial(inString):
     ser.write((inString + "\n").encode('ASCII'))
     line = ser.readline().decode('ASCII').rstrip()
+    print(line)
+    time.sleep(1)
     return line
 
 
