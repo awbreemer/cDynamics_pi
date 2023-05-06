@@ -22,7 +22,6 @@ def to_arduino_serial(inString):
     ser.write((inString + "\n").encode('UTF-8'))
     line = ser.readline().decode('ASCII').rstrip()
     print(line)
-    time.sleep(1)
     return line
 
 
@@ -69,7 +68,7 @@ def provide_values():
         newVal.input_request_but(request.form.get('big_increase'), large_adjust_val)
         output_val(newVal.return_turn_amt()) 
         outText = to_arduino_serial(str(newVal.return_turn_amt()))
-    return render_template("form2.html", returnText=outText)
+    return render_template("form2.html", returnText="hey babe")
 
 
 if __name__ == '__main__':
