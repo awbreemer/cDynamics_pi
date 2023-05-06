@@ -20,7 +20,7 @@ def output_val(inVal):
 
 def to_arduino_serial(inString):
     ser.write((inString + "\n").encode('UTF-8'))
-    line = ser.readline().decode('ASCII').rstrip()
+    line = ser.readline().decode('UTF-8').rstrip()
     print(line)
     return line
 
