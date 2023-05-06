@@ -7,11 +7,11 @@ small_adjust_val = .1
 large_adjust_val = .5
 baud_rate = 9600
 
-def determine_input(cust, big_d, d, i, big_i):
-    args = locals()
-    for j in args:
-        if j is not None:
-            return j, 
+# def determine_input(cust, big_d, d, i, big_i):
+#     args = locals()
+#     for j in args:
+#         if j is not None:
+#             return j, 
 
 def output_val(inVal):
     F = open("RecordVals.txt", 'a')
