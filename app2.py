@@ -19,7 +19,7 @@ def output_val(inVal):
     F.close()
 
 def to_arduino_serial(inString):
-    ser.write((inString + "\n").encode('ASCII'))
+    ser.write((inString + "\n").encode('UTF-8'))
     line = ser.readline().decode('ASCII').rstrip()
     print(line)
     time.sleep(1)
@@ -74,5 +74,6 @@ def provide_values():
 
 if __name__ == '__main__':
     ser = serial.Serial('/dev/ttyUSB0', baud_rate, timeout=1)
+    ser.reset_input_buffer()
     app.run(host="0.0.0.0", debug=True)
 
