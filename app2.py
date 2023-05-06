@@ -69,7 +69,7 @@ def provide_values():
         newVal.input_request_but(request.form.get('big_increase'), large_adjust_val)
         output_val(newVal.return_turn_amt()) 
         outText = to_arduino_serial(str(newVal.return_turn_amt()))
-    return render_template("form2.html", returnText="outText")
+    return render_template("form2.html", returnText=outText)
 
 
 if __name__ == '__main__':
