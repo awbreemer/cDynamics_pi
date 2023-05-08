@@ -29,7 +29,7 @@ def to_arduino_serial(inString):
 
 class process_vals:
     def __init__(self, adjustVal = None):
-        if adjustVal == "":
+        if adjustVal == "" or adjustVal == None:
             self.adjustVal = 0.0
         else:
             self.adjustVal = float(adjustVal)
