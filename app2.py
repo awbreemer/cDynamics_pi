@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, redirect, url_for
 import serial
 import time
 from valueConfig import *
@@ -75,7 +75,7 @@ app = Flask(__name__)
 
 
 @app.route('/', methods = ['GET', 'POST'])
-def provide_values():
+def home():
     outText = "-"
     if request.method == 'POST':
         newVal = process_vals()
@@ -93,8 +93,16 @@ def provide_values():
 @app.route('/menu', methods = ['GET', 'POST'])
 def menu():
     if request.method == 'POST':
-        pass
-    return render_template("menu.html", smallAdjust=small_adjust_val, largeAdjust=large_adjust_val, baudAdjust=baud_rate)
+        smallAdjustString = request.form.get('smallAdjustVal') 
+        small_adjust_val =  float(smallAdjustString)
+        largeAdjustString = request.form.get('largeAdjustVal')
+        large_adjust_val = float(largeAdjustString)
+        baudAdjustString = request.form.get('baudRateAdjust')
+        baud_rate = float(baudAdjustString)
+        rewriteValueConfigPy()
+        return redirect(url_for('home'))
+
+    return render_template("menu.html", smallAdjust=small_adjust_val, largeAdjust=large_adjust_val, baudRate=baud_rate)
         
 
 
