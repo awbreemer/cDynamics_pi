@@ -93,7 +93,7 @@ def home():
         newVal.input_request_but(request.form.get('increase'), small_adjust_val)
         newVal.input_request_but(request.form.get('big_increase'), large_adjust_val)
         stepSize = request.form.get('stepSize')
-        to_arduino_serial(stepSize + '\n')
+        to_arduino_serial(stepSize)
         print(f"The output of the request form is {request.form.get('valueAdjust')} .")
         output_val(newVal.return_turn_amt()) 
         outText = to_arduino_serial(str(newVal.return_turn_amt()))
