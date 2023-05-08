@@ -3,6 +3,12 @@
     <header><title>Change base operating values</title></header>
     <body>
         <form method="POST">
+            <label for="userNameChange">Enter new username:</label>
+            <input type="text" name="userNameChange" value="{{ userName|safe }}"><input type="submit" value="submit">
+            <br>
+            <label for="passwordChange">Enter the new password:</label>
+            <input type="text" name="passwordChange" value="{{ password|safe }}"><input type="submit" value="submit">
+            <br>
             <label for="smallAdjustVal">Enter the value for how much the small adjust button will rotate the lense:</label>
             <input type="text" name="smallAdjustVal" value="{{ smallAdjust|safe }}"><input type="submit" value="submit">
             <br>

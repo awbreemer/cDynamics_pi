@@ -58,7 +58,8 @@ def menu_option_adjust(menu_option, value):
 
 def rewriteValueConfigPy():
     with open("valueConfig.py", 'w') as file:
-        toFile = f"small_adjust_val = {small_adjust_val}\nlarge_adjust_val = {large_adjust_val}\nbaud_rate = {baud_rate}"
+        toFile = f"small_adjust_val = {small_adjust_val}\nlarge_adjust_val = {large_adjust_val}\nbaud_rate = {baud_rate}\n"
+        toFile += f"password = {password}\nuser_name = {user_name}"
         file.write(toFile)
 
 
@@ -93,7 +94,9 @@ def home():
 @app.route('/menu', methods = ['GET', 'POST'])
 def menu():
     if request.method == 'POST':
-        global small_adjust_val, large_adjust_val, baud_rate
+        global small_adjust_val, large_adjust_val, baud_rate, password, user_name
+        user_name = request.form['userNameChange']
+        password = request.form['passwordChange']
         smallAdjustString = request.form.get('smallAdjustVal') 
         small_adjust_val =  float(smallAdjustString)
         largeAdjustString = request.form.get('largeAdjustVal')
@@ -109,7 +112,7 @@ def menu():
 def login():
     error = None
     if request.method == 'POST':
-        if request.form['username'] != 'admin' or request.form['password'] != 'admin':
+        if request.form['username'] != user_name or request.form['password'] != password:
             error = 'Invalid Credentials. Please try again.'
         else:
             return redirect(url_for('home'))
