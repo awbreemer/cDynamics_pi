@@ -94,7 +94,7 @@ def provide_values():
 def menu():
     if request.method == 'POST':
         pass
-    return render_template("valueChangePage.html", smallAdjust=small_adjust_val, largeAdjust=large_adjust_val, baudAdjust=baud_rate)
+    return render_template("menu.html", smallAdjust=small_adjust_val, largeAdjust=large_adjust_val, baudAdjust=baud_rate)
         
 
 
