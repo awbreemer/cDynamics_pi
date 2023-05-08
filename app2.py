@@ -110,7 +110,7 @@ def menu():
 
 @app.route('/', methods=['GET', 'POST'])
 def login():
-    println(f"the password is {password} and the username is {user_name}.")
+    print(f"the password is {password} and the username is {user_name}.")
     error = None
     if request.method == 'POST':
         if request.form['username'] != user_name or request.form['password'] != password:
