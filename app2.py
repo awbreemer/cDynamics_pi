@@ -36,7 +36,10 @@ class process_vals:
 
     def input_request_val(self, val):
         if val != "":
-            self.adjustVal += float(val)
+            try:
+                self.adjustVal += float(val)
+            except:
+                pass
 
     def input_request_but(self, button_val, amount):
         if button_val != None:
@@ -69,6 +72,9 @@ def test_3_args(a1, a2, a3 = 0):
     if a3 != 0:
         print(a3)   
 
+
+
+
 app = Flask(__name__)
 #sslify = SSLify(app)
 #sslify = SSLify(app, permanent=True, age=300, subdomains=True, port=8443)
@@ -86,6 +92,8 @@ def home():
         newVal.input_request_but(request.form.get('decrease'), -small_adjust_val)
         newVal.input_request_but(request.form.get('increase'), small_adjust_val)
         newVal.input_request_but(request.form.get('big_increase'), large_adjust_val)
+        stepSize = request.form.get('stepSize')
+        to_arduino_serial(stepSize + '\n')
         print(f"The output of the request form is {request.form.get('valueAdjust')} .")
         output_val(newVal.return_turn_amt()) 
         outText = to_arduino_serial(str(newVal.return_turn_amt()))
@@ -97,12 +105,21 @@ def menu():
         global small_adjust_val, large_adjust_val, baud_rate, password, user_name
         user_name = request.form['userNameChange']
         password = request.form['passwordChange']
-        smallAdjustString = request.form.get('smallAdjustVal') 
-        small_adjust_val =  float(smallAdjustString)
+        smallAdjustString = request.form.get('smallAdjustVal')
+        try: 
+            small_adjust_val =  float(smallAdjustString)
+        except:
+            pass
         largeAdjustString = request.form.get('largeAdjustVal')
-        large_adjust_val = float(largeAdjustString)
+        try:
+            large_adjust_val = float(largeAdjustString)
+        except:
+            pass
         baudAdjustString = request.form.get('baudRateAdjust')
-        baud_rate = float(baudAdjustString)
+        try:
+            baud_rate = int(baudAdjustString)
+        except:
+            pass
         rewriteValueConfigPy()
         return redirect(url_for('home'))
 

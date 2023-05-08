@@ -13,7 +13,18 @@
             <button type="submit", name="decrease", value="pressed">&lt;</button>
             <button type="submit", name="increase", value="pressed">></button>
             <button type="submit", name="big_increase", value="pressed">>></button> 
-            </br>
+            <br>
+            <br>
+            <br>
+            <label for="stepSize">Enter the step size you would like to use for this rotation</label>
+            <select id="stepSize" name="stepSize">
+                <option value="a1">1:1</option>
+                <option value="a2">1:2</option>
+                <option value="a4">1:4</option>
+                <option value="a8">1:8</option>
+                <option value="a16">1:16</option>
+                <option value="a32">1:32</option>
+            </select>
             <a href="{{ url_for('menu') }}">Go to menu Page</a>
             <br>
             <label for="returnField">Aruino Response &#40 Don't Enter Text &#41 </label>
