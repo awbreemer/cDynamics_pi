@@ -47,8 +47,20 @@ class process_vals:
     
 def menu_option_adjust(menu_option, value):
     if menu_option == "small_adjust_val":
+        global small_adjust_val 
         small_adjust_val = value
-    
+    elif menu_option == "large_adjust_val":
+        global large_adjust_val
+        large_adjust_val = value
+    elif menu_option == "baud_rate":
+        global baud_rate
+        baud_rate = value  
+
+def rewriteValueConfigPy():
+    with open("valueConfig.py", 'w') as file:
+        toFile = f"small_adjust_val = {small_adjust_val}\nlarge_adjust_val = {large_adjust_val}\nbaud_rate = {baud_rate}"
+        file.write(toFile)
+
 
 def test_3_args(a1, a2, a3 = 0):
     print(a1)
@@ -74,11 +86,16 @@ def provide_values():
         newVal.input_request_but(request.form.get('increase'), small_adjust_val)
         newVal.input_request_but(request.form.get('big_increase'), large_adjust_val)
         print(f"The output of the request form is {request.form.get('valueAdjust')} .")
-        if request.form.get('valueAdjust') != None:
-            return render_template("valueChangePage.html", smallAdjust=small_adjust_val, largeAdjust=large_adjust_val, baudAdjust=baud_rate)
         output_val(newVal.return_turn_amt()) 
         outText = to_arduino_serial(str(newVal.return_turn_amt()))
     return render_template("form2.html", returnText=outText)
+
+@app.route('/menu', methods = ['GET', 'POST'])
+def menu():
+    if request.method == 'POST':
+        pass
+    return render_template("valueChangePage.html", smallAdjust=small_adjust_val, largeAdjust=large_adjust_val, baudAdjust=baud_rate)
+        
 
 
 if __name__ == '__main__':
