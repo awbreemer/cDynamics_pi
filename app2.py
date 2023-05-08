@@ -59,7 +59,7 @@ def menu_option_adjust(menu_option, value):
 def rewriteValueConfigPy():
     with open("valueConfig.py", 'w') as file:
         toFile = f"small_adjust_val = {small_adjust_val}\nlarge_adjust_val = {large_adjust_val}\nbaud_rate = {baud_rate}\n"
-        toFile += f"password = {password}\nuser_name = {user_name}"
+        toFile += f"password = '{password}'\nuser_name = '{user_name}'"
         file.write(toFile)
 
 
