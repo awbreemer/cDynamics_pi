@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+    <header><title>Change base operating values</title></header>
+    <body>
+        <form method="POST">
+            <label for="smallAdjustVal">Enter the value for how much the small adjust button will rotate the lense:</label>
+            <input type="text" name="smallAdjustVal" value="{{ smallAdjust|safe }}"><input type="submit" value="submit">
+            <br>
+            <label for="largeAdjustVal">Enter the value for how much the large adjust buttom will rotate the lense:</label>
+            <input type="text" name="largeAdjustVal" value="{{ largeAdjust|safe }}"><input type="submit" value="submit">
+            <br>
+            <label for="adjustBaudRate">Enter the value of the new Baud rate:</label>
+            <input type="text" name="baudRateAdjust" value="{{ baudRate|safe }}"><input type="submit" value="submit">
+        </form>
+    </body>
+</html>

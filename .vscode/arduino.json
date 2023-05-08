@@ -1,0 +1,6 @@
+{
+    "configuration": "svl_baud=460800,loader=option_svl",
+    "board": "SparkFun:apollo3:sfe_artemis_atp",
+    "programmer": "asb_programmer",
+    "sketch": "SPItest\\SPItest.ino"
+}

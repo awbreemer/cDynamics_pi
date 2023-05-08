@@ -1,8 +1,12 @@
 from flask import Flask, render_template, request
 import serial
 import time
+from valueConfig import *
 #from flask_sslify import SSLify
 
+
+
+#MENU OPTIONS
 small_adjust_val = .1
 large_adjust_val = .5
 baud_rate = 9600
@@ -42,6 +46,10 @@ class process_vals:
 
     def return_turn_amt(self):
         return self.adjustVal
+    
+def process_value_changes(inString):
+    if inString != "":
+        return render_template("valueChangePage.html", smallAdjust=small_adjust_val, largeAdjust=large_adjust_val, baudAdjust=baud_rate)
 
 def test_3_args(a1, a2, a3 = 0):
     print(a1)
@@ -66,6 +74,8 @@ def provide_values():
         newVal.input_request_but(request.form.get('decrease'), -small_adjust_val)
         newVal.input_request_but(request.form.get('increase'), small_adjust_val)
         newVal.input_request_but(request.form.get('big_increase'), large_adjust_val)
+        if request.form.get('valueAdjust') != "":
+            return render_template("valueChangePage.html", smallAdjust=small_adjust_val, largeAdjust=large_adjust_val, baudAdjust=baud_rate)
         output_val(newVal.return_turn_amt()) 
         outText = to_arduino_serial(str(newVal.return_turn_amt()))
     return render_template("form2.html", returnText=outText)

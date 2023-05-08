@@ -4,7 +4,7 @@
     <body>
         <form method="POST">
             <label for="user_val">Enter custom adjustment amount:</label>
-            <input type="number", name = "user_val">
+            <input type="text", name = "user_val">
             <input type="submit", value="submit">
             <br>
             Or use the buttons to adjust:
@@ -14,6 +14,8 @@
             <button type="submit", name="increase", value="pressed">></button>
             <button type="submit", name="big_increase", value="pressed">>></button> 
             </br>
+            <button type="sumbit", name="valueAdjust", value="pressed">Change Options</button>
+            <br>
             <label for="returnField">Aruino Response &#40 Don't Enter Text &#41 </label>
             <input type="text" id="returnField" name="Return Field" value="{{ returnText|safe }}">        
         </form>
