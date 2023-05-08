@@ -35,7 +35,7 @@ class process_vals:
             self.adjustVal = float(adjustVal)
 
     def input_request_val(self, val):
-        if val != None:
+        if val != "":
             self.adjustVal += float(val)
 
     def input_request_but(self, button_val, amount):
