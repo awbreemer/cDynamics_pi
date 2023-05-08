@@ -14,7 +14,7 @@
             <button type="submit", name="increase", value="pressed">></button>
             <button type="submit", name="big_increase", value="pressed">>></button> 
             </br>
-            <button type="sumbit", name="valueAdjust", value="pressed">Change Options</button>
+            <a href="{{ url_for('menu') }}">Go to menu Page</a>
             <br>
             <label for="returnField">Aruino Response &#40 Don't Enter Text &#41 </label>
             <input type="text" id="returnField" name="Return Field" value="{{ returnText|safe }}">        

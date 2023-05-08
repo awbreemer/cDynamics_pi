@@ -7,9 +7,7 @@ from valueConfig import *
 
 
 #MENU OPTIONS
-small_adjust_val = .1
-large_adjust_val = .5
-baud_rate = 9600
+
 
 # def determine_input(cust, big_d, d, i, big_i):
 #     args = locals()
@@ -31,13 +29,13 @@ def to_arduino_serial(inString):
 
 class process_vals:
     def __init__(self, adjustVal = None):
-        if adjustVal == None:
+        if adjustVal == "":
             self.adjustVal = 0.0
         else:
-            self.adjustVal = adjustVal
+            self.adjustVal = float(adjustVal)
 
     def input_request_val(self, val):
-        if val != "":
+        if val != None:
             self.adjustVal += float(val)
 
     def input_request_but(self, button_val, amount):
@@ -47,9 +45,10 @@ class process_vals:
     def return_turn_amt(self):
         return self.adjustVal
     
-def process_value_changes(inString):
-    if inString != "":
-        return render_template("valueChangePage.html", smallAdjust=small_adjust_val, largeAdjust=large_adjust_val, baudAdjust=baud_rate)
+def menu_option_adjust(menu_option, value):
+    if menu_option == "small_adjust_val":
+        small_adjust_val = value
+    
 
 def test_3_args(a1, a2, a3 = 0):
     print(a1)
