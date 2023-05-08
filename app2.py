@@ -106,7 +106,7 @@ def menu():
         rewriteValueConfigPy()
         return redirect(url_for('home'))
 
-    return render_template("menu.html", smallAdjust=small_adjust_val, largeAdjust=large_adjust_val, baudRate=baud_rate)
+    return render_template("menu.html", smallAdjust=small_adjust_val, largeAdjust=large_adjust_val, baudRate=baud_rate, passwordChange = password, userNameChange = user_name)
 
 @app.route('/', methods=['GET', 'POST'])
 def login():
