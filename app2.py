@@ -93,6 +93,7 @@ def home():
 @app.route('/menu', methods = ['GET', 'POST'])
 def menu():
     if request.method == 'POST':
+        global small_adjust_val, large_adjust_val, baud_rate
         smallAdjustString = request.form.get('smallAdjustVal') 
         small_adjust_val =  float(smallAdjustString)
         largeAdjustString = request.form.get('largeAdjustVal')
