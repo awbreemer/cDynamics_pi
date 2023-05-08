@@ -75,7 +75,7 @@ def provide_values():
         newVal.input_request_but(request.form.get('increase'), small_adjust_val)
         newVal.input_request_but(request.form.get('big_increase'), large_adjust_val)
         print(f"The output of the request form is {request.form.get('valueAdjust')} .")
-        if request.form.get('valueAdjust') != "":
+        if request.form.get('valueAdjust') != None:
             return render_template("valueChangePage.html", smallAdjust=small_adjust_val, largeAdjust=large_adjust_val, baudAdjust=baud_rate)
         output_val(newVal.return_turn_amt()) 
         outText = to_arduino_serial(str(newVal.return_turn_amt()))
