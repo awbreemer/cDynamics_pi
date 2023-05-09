@@ -84,8 +84,8 @@ app = Flask(__name__)
 @app.route('/home', methods = ['GET', 'POST'])
 def home():
     outText = "-"
+    previous_step_size = 'a1'
     if request.method == 'POST':
-        previous_step_size = 'a1'
         newVal = process_vals()
         newVal.input_request_val(request.form.get('user_val'))
         #test_3_args(request.form.get('big_decrease'), -large_adjust_val)
