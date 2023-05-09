@@ -118,6 +118,7 @@ def home():
         print(f"The output of the request form is {request.form.get('valueAdjust')} .")
         output_val(newVal.return_turn_amt()) 
         outText = to_arduino_serial(str(newVal.return_turn_amt()))
+        time.sleep(1)
     return render_template("main.html", returnText=outText, default_step = previous_step_size)
 
 @app.route('/menu', methods = ['GET', 'POST'])
