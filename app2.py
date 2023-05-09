@@ -85,6 +85,7 @@ app = Flask(__name__)
 def home():
     outText = "-"
     if request.method == 'POST':
+        previous_step_size = 'a1'
         newVal = process_vals()
         newVal.input_request_val(request.form.get('user_val'))
         #test_3_args(request.form.get('big_decrease'), -large_adjust_val)
@@ -93,11 +94,12 @@ def home():
         newVal.input_request_but(request.form.get('increase'), small_adjust_val)
         newVal.input_request_but(request.form.get('big_increase'), large_adjust_val)
         stepSize = request.form.get('stepSize')
+        previous_step_size = stepSize
         to_arduino_serial(stepSize)
         print(f"The output of the request form is {request.form.get('valueAdjust')} .")
         output_val(newVal.return_turn_amt()) 
         outText = to_arduino_serial(str(newVal.return_turn_amt()))
-    return render_template("form2.html", returnText=outText)
+    return render_template("form2.html", returnText=outText, default_step = previous_step_size)
 
 @app.route('/menu', methods = ['GET', 'POST'])
 def menu():

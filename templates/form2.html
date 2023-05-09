@@ -18,12 +18,12 @@
             <br>
             <label for="stepSize">Enter the step size you would like to use for this rotation</label>
             <select id="stepSize" name="stepSize">
-                <option value="a1">1:1</option>
-                <option value="a2">1:2</option>
-                <option value="a4">1:4</option>
-                <option value="a8">1:8</option>
-                <option value="a16">1:16</option>
-                <option value="a32">1:32</option>
+                <option value="a1" {% if default_step == 'a1' %}selected{% endif %}>1:1</option>
+                <option value="a2" {% if default_step == 'a2' %}selected{% endif %}>1:2</option>
+                <option value="a4" {% if default_step == 'a4' %}selected{% endif %}>1:4</option>
+                <option value="a8" {% if default_step == 'a8' %}selected{% endif %}>1:8</option>
+                <option value="a16" {% if default_step == 'a16' %}selected{% endif %}>1:16</option>
+                <option value="a32" {% if default_step == 'a32' %}selected{% endif %}>1:32</option>
             </select>
             <a href="{{ url_for('menu') }}">Go to menu Page</a>
             <br>
