@@ -3,12 +3,14 @@
     <header><title>Choose your camera then choose your adjustment value:</title></header>
     <body>
         <form method="POST">
-            <label for="user_val">Enter custom adjustment amount:</label>
+            <!--This section is for entering the custom adjustment amount-->
+            <label for="user_val">Enter custom adjustment amount (degrees of motor rotation):</label>
             <input type="text", name = "user_val">
             <input type="submit", value="submit">
             <br>
             Or use the buttons to adjust:
             <br>
+            <!--This section is for changing the rotation of the motor with the buttons-->
             <button type="submit", name="big_decrease", value="pressed">&lt;&lt;</button>
             <button type="submit", name="decrease", value="pressed">&lt;</button>
             <button type="submit", name="increase", value="pressed">></button>
@@ -16,6 +18,8 @@
             <br>
             <br>
             <br>
+            <!--This section is for adjusting the step size to be used for the rotation-->
+            <!--Default step is passed in from the python code so that the last picked step size is the current one-->
             <label for="stepSize">Enter the step size you would like to use for this rotation</label>
             <select id="stepSize" name="stepSize">
                 <option value="a1" {% if default_step == 'a1' %}selected{% endif %}>1:1</option>
@@ -25,10 +29,14 @@
                 <option value="a16" {% if default_step == 'a16' %}selected{% endif %}>1:16</option>
                 <option value="a32" {% if default_step == 'a32' %}selected{% endif %}>1:32</option>
             </select>
-            <a href="{{ url_for('menu') }}">Go to menu Page</a>
-            <br>
+            <br><br>
+            <!--The python code should populate this feild with a response from the arduino-->
             <label for="returnField">Aruino Response &#40 Don't Enter Text &#41 </label>
-            <input type="text" id="returnField" name="Return Field" value="{{ returnText|safe }}">        
+            <input type="text" id="returnField" name="Return Field" value="{{ returnText|safe }}">    
+            <br><br>
+            <!--A link for changing the menu options-->
+            <a href="{{ url_for('menu') }}">Go to menu Page</a>
+
         </form>
 
 

@@ -9,18 +9,19 @@ from valueConfig import *
 #MENU OPTIONS
 
 
-# def determine_input(cust, big_d, d, i, big_i):
-#     args = locals()
-#     for j in args:
-#         if j is not None:
-#             return j, 
 
 def output_val(inVal):
     F = open("RecordVals.txt", 'a')
     F.write("\n" + str(inVal))
     F.close()
 
+
+
 def to_arduino_serial(inString):
+    """Write a string to arduino
+    gets encoded with UTF-8
+    function takes a string
+    function returns a string that the arduino sends"""
     ser.write((inString + "\n").encode('UTF-8'))
     line = ser.readline().decode('UTF-8').rstrip()
     print(line)
@@ -28,13 +29,18 @@ def to_arduino_serial(inString):
 
 
 class process_vals:
+    """Class used to process button imputs from main page"""
     def __init__(self, adjustVal = ""):
+        """Shoud be called with no input except for testing"""
         if adjustVal == "":
             self.adjustVal = 0.0
         else:
             self.adjustVal = float(adjustVal)
 
     def input_request_val(self, val):
+        """Used for numeric string input on main page
+        takes in a string value
+        adds to the adjust value"""
         if val != "":
             try:
                 self.adjustVal += float(val)
@@ -42,13 +48,21 @@ class process_vals:
                 pass
 
     def input_request_but(self, button_val, amount):
+        """Used for handling adjust buttons
+        takes in string or none, indicating if 'pressed' or not
+        if pressed, adds amount on the the adjust value"""
         if button_val != None:
             self.adjustVal += amount
 
     def return_turn_amt(self):
+        """Returns the adjust value that complies the buttons or input
+        string. """
         return self.adjustVal
     
 def menu_option_adjust(menu_option, value):
+    """Takes String for the menu option to be changed.
+    Takes a value for the menu_option to be adjusted to.
+    Sets the global values to the new ones."""
     if menu_option == "small_adjust_val":
         global small_adjust_val 
         small_adjust_val = value
@@ -60,10 +74,14 @@ def menu_option_adjust(menu_option, value):
         baud_rate = value  
 
 def rewriteValueConfigPy():
+    """This software uses a config.py file to store values between use sessions.
+    config.py should be updated when global vaiables are changed so that values are saved between sessions. 
+    This function updates all the values stored in the config.py file."""
     with open("valueConfig.py", 'w') as file:
         toFile = f"small_adjust_val = {small_adjust_val}\nlarge_adjust_val = {large_adjust_val}\nbaud_rate = {baud_rate}\n"
         toFile += f"password = '{password}'\nuser_name = '{user_name}'"
         file.write(toFile)
+        file.close()
 
 
 def test_3_args(a1, a2, a3 = 0):
@@ -83,6 +101,7 @@ app = Flask(__name__)
 
 @app.route('/home', methods = ['GET', 'POST'])
 def home():
+    """This function handles the main page of the motor. """
     outText = "-"
     previous_step_size = 'a1'
     if request.method == 'POST':
@@ -99,10 +118,11 @@ def home():
         print(f"The output of the request form is {request.form.get('valueAdjust')} .")
         output_val(newVal.return_turn_amt()) 
         outText = to_arduino_serial(str(newVal.return_turn_amt()))
-    return render_template("form2.html", returnText=outText, default_step = previous_step_size)
+    return render_template("main.html", returnText=outText, default_step = previous_step_size)
 
 @app.route('/menu', methods = ['GET', 'POST'])
 def menu():
+    """This function handles the value adjust page of the motor."""
     if request.method == 'POST':
         global small_adjust_val, large_adjust_val, baud_rate, password, user_name
         user_name = request.form['userNameChange']
@@ -129,6 +149,7 @@ def menu():
 
 @app.route('/', methods=['GET', 'POST'])
 def login():
+    """This page handles the login page of the website."""
     print(f"the password is {password} and the username is {user_name}.")
     error = None
     if request.method == 'POST':
